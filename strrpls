@@ -1,5 +1,6 @@
 void MainWindow::on_pushButton_MapTest_clicked()
 {
+    //test pull
     list<char*> *orgList = new list<char*>;
     list<char*> *newList = new list<char*>;
     

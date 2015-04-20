@@ -1,0 +1,50 @@
+void MainWindow::on_pushButton_MapTest_clicked()
+{
+    list<char*> *orgList = new list<char*>;
+    list<char*> *newList = new list<char*>;
+    
+    orgList->push_front("192.168.0.2");
+    orgList->push_front("192.168.0.1");
+    orgList->push_front("127.0.0.3");
+    orgList->push_front("127.0.0.1");
+    orgList->push_front("8.8.8.8");
+
+    MAPPING_MAP mappingMap;
+    mappingMap["192.168.0.1"] = "local";
+    mappingMap["127.0.0.1"] = "localhost";
+    mappingMap["8.8.8.8"] = "google DNS";
+
+    list<char*>::iterator itList;
+    MAPPING_MAP::iterator itMap;
+    MAPPING_MAP::iterator itMap2;
+
+    for(itList = orgList->begin();    itList != orgList->end() ;    itList ++ )
+    {
+        qDebug() << *itList;
+        for(itMap = mappingMap.begin(); itMap != mappingMap.end(); itMap ++)
+        {
+            if(strcmp(*itList, (*itMap).first ) == 0)
+            {
+                //qDebug() << *itList;
+                //qDebug() << (*itMap).first;
+                newList->push_back((*itMap).second );
+                break;
+            }
+            else
+            {
+                itMap2 = itMap;
+                itMap2 ++;
+                if((itMap2) == mappingMap.end())
+                {
+                   newList->push_back(*itList);
+                }
+            }
+        }
+    }
+    qDebug() <<" =============================  ";
+    for(itList = newList->begin(); itList != newList->end() ; itList ++ )
+    {
+        qDebug() << *itList;
+    }
+
+}
